@@ -96,7 +96,7 @@ JSX compilation is by far the most interesting facet of a hybrid Solid.js - Reac
 
 ### File Path Disambiguation
 
-Using webpack, this is the simplest approach and one used by the demo application, currently. The current implementation checks if a JSX file contains the letters `react` in its path and will use the `@babel/preset-react` in that case; otherwise all JSX files are loaded with `babel-preset-solid`. As such, this project places all React-JSX files within the `src/react` directory. Similarly, custom file extensions such as `.jsx`, `.s.jsx`, or `.r.jsx` could be used to designate which babel presets to use for a given JSX file.
+Using webpack, this is the simplest approach and one used by the demo application, currently. The current implementation has multiple module loaders declared for JSX files. If a `.jsx` file is found within the `src/react` directory it is processed with the babel loader `@babel/preset-react`; all other JSX files are processed with `babel-preset-solid`. A similar approach would be to use, distinct file extensions such as `.jsx`, `.s.jsx`, or `.r.jsx` could to designate which babel presets to use for a given JSX file.
 
 :warning: In this configuration, *all JSX content* within a given file are one framework or the other. This meeans special care must be take for components which accept component props. For example, a React component imported and wrapped within a Solid component cannot accept a property written in JSX unless that component is likewise wrapped or was exported from React JSX file:
 
