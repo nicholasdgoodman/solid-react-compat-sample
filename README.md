@@ -21,7 +21,7 @@ The basic premise behind the current functionalty is to wrap React-in-Solid or S
 
 Consuming a single React component from a Solid is as follows:
 
-```
+```jsx
 import { Button as ReactButton } from 'some-react-library/components';
 import { reactToSolid } from '../compat';
 
@@ -37,7 +37,7 @@ export function SolidComponent() {
 
 To avoid complicated aliasing and renaming of several components in a given file, the wrapper function also accepts an object containing properties which are components:
 
-```
+```jsx
 import { Label, Button } from 'some-react-library/components';
 import { reactToSolid } from '../compat';
 
@@ -100,7 +100,7 @@ Using webpack, this is the simplest approach and one used by the demo applicatio
 
 :warning: In this configuration, *all JSX content* within a given file are one framework or the other. This meeans special care must be take for components which accept component props. For example, a React component imported and wrapped within a Solid component cannot accept a property written in JSX unless that component is likewise wrapped or was exported from React JSX file:
 
-```
+```jsx
 import { ReactComponent } from '../react/ReactComponents';
 import { reactToSolid } from '../compat';
 
@@ -127,7 +127,7 @@ This approach may or may not be possible; but will likely require writing a cust
 
 This would require a custom loader:
 
-```
+```jsx
 /* jsx-preset react */
 
 export function ReactComponent() {
@@ -137,7 +137,7 @@ export function ReactComponent() {
 
 Alternatively, it could be possible to declare the JSX mode at the import level by using built-in webpack syntax and loader aliases:
 
-```
+```jsx
 // in this case, the Solid is the default JSX, and we opt-in to React compilation at import time:
 
 import { ReactComponent } from 'babel-loader-react!../components';
@@ -151,7 +151,7 @@ export function SolidComponent() {
 
 This approach would be the _pièce de résistance_ of hybrid Solid / React applications. Requiring further research and writing of a custom Babel loader, a hypothetical future-implementation might look something like:
 
-```
+```jsx
 import { SolidComponent } from '../components';
 import { ReactComponent } from '../components/legacy';
 
